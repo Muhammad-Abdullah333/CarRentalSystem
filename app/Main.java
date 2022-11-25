@@ -33,7 +33,8 @@ public static void main(String[] args) {
 				System.out.println("Press 4 to add a new vehicle");
 				System.out.println("Press 5 to remove a vehicle");
 				System.out.println("Press 6 to make payment");
-				System.out.println("Press 7 to exit application");
+				System.out.println("Press 7 to view payment");
+				System.out.println("Press 8 to exit application");
 				int choice = sc.nextInt();
 					switch (choice)
 					{
@@ -70,6 +71,9 @@ public static void main(String[] args) {
 						Payment.makePayment(Account.getUser(), amount);
 						break;
 					case 7:
+						System.out.println(Account.getUser().getCharge());
+						break;
+					case 8:
 						signIn = false;
 						exit = true;
 						break;
