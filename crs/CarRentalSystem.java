@@ -115,7 +115,7 @@ public class CarRentalSystem {
 		Cars.add(c);
 		System.out.println("A new car with registration number "+c.getId()+" has been added");
 		}catch(InputMismatchException e) {
-			System.out.println("Registraion number is an Integer field");
+			System.out.println("You have entered a non Integer in an Integer field");
 		}
 	}
 	
