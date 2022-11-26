@@ -34,7 +34,7 @@ private static void system() {
 	int display = 0;
 	System.out.println("Welcome "+acc.getUsername());
 	if(!acc.isAdmin()) {
-		while(display!=5 && acc!=null) {
+		while(display!=6 && acc!=null) {
 			display =0 ;
 			while(display == 0) {
 				display = genralMenu();
