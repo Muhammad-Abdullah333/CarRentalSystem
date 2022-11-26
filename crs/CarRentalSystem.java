@@ -164,6 +164,7 @@ public class CarRentalSystem {
 						if(choice == 1) {
 							a.setCharges(c.getRentalCharge()+a.getCharges());
 							a.getRentedCars().add(c);
+							c.setRentDate();
 							c.setAvailable(false);
 						}
 						else {
@@ -182,16 +183,22 @@ public class CarRentalSystem {
 		try {
 			Scanner sc = new Scanner(System.in);
 			int id = sc.nextInt();
-			for(Car c: Cars) {
-				if(c.getId() == id && !c.isAvailable()) {
-					Cars.add(c);
-					a.getRentedCars().remove(c);
-					if(c.getReturnDate().isBefore(LocalDate.now())) {
-						a.setCharges(c.getRentalCharge()+100);
-						System.out.println("You have returned the car after its due date hence a fine of 100 has been charged to your accout");
-					}				
-				}else {
-					System.out.println("Either the car is already present in garage or it is not registered in Car Rental System");
+			Car c  = null;
+			for(Car car: Cars) {
+				if(car.getId() == id && !car.isAvailable()) {
+					c = car;
+					}
+			}
+			if(c == null) {
+				System.out.println("Either the car is already present in garage or not registered to Car Rental System");
+			}
+			else {
+				a.getRentedCars().remove(c);
+				c.setAvailable(true);
+				if(c.getReturnDate().isBefore(LocalDate.now())) {
+					a.setCharges(c.getRentalCharge()+100);
+					System.out.println("You have returned the car after its due date hence a fine of 100 has been charged to your accout");
+				return;
 				}
 			}
 		}catch(InputMismatchException e) {
