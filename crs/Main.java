@@ -34,13 +34,14 @@ private static void system() {
 	int display = 0;
 	System.out.println("Welcome "+acc.getUsername());
 	if(!acc.isAdmin()) {
-		while(display!=6 && acc!=null) {
+		while(display!=7 && acc!=null) {
 			display =0 ;
 			while(display == 0) {
 				display = genralMenu();
 			}
 			switch(display) {
 			case 1:
+				System.out.println("Following is the list of all available cars\n");
 				crs.displayAllAvailableCars();
 				break;
 			case 2:
@@ -53,10 +54,13 @@ private static void system() {
 				System.out.println(acc.getRentedCars());
 				break;
 			case 5:
+				acc.makePayment();
+				break;
+			case 6:
 				System.out.println("Good Bye "+acc.getUsername()+" !!!");
 				acc = null;
 				break;
-			case 6:
+			case 7:
 				break;
 			}	
 		}
@@ -108,13 +112,14 @@ private static int AccountManagement() {
 private static int genralMenu() {
 	int input = 0;
 	try {
-	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5 && input!=6){
+	while(input!=1 && input!=2 && input!=3 && input!=4 && input!=5 && input!=6 && input!=7){
 	System.out.println("Press 1 to view all available cars");
 	System.out.println("Press 2 to rent a car");
 	System.out.println("Press 3 to return a car");
 	System.out.println("Press 4 to view all rented cars");
-	System.out.println("Press 5 to Log out");
-	System.out.println("Press 6 to exit");
+	System.out.println("Press 5 to make payment");
+	System.out.println("Press 6 to Log out");
+	System.out.println("Press 7 to exit");
 	input = sc.nextInt();
 	}
 	return input;

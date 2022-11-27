@@ -8,6 +8,7 @@ public class Account {
 	private String password;
 	private int charges;
 	private ArrayList<Car> rentedCars;
+	private Payment pay;
 	public Account(String username, String password) {
 		super();
 		this.username = username;
@@ -15,6 +16,7 @@ public class Account {
 		this.admin = false;
 		this.charges = 0;
 		rentedCars = new ArrayList<Car>();
+		pay = new Payment();
 	}
 	public int getCharges() {
 		return charges;
@@ -39,5 +41,8 @@ public class Account {
 	}
 	public void setRentedCars(ArrayList<Car> rentedCars) {
 		this.rentedCars = rentedCars;
+	}
+	public void makePayment() {
+		pay.makePayment(this);
 	}
 }

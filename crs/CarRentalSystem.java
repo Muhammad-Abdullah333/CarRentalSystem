@@ -1,17 +1,17 @@
 package crs;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CarRentalSystem {
-	static ArrayList<Account> Accounts;
-	static ArrayList<Car> Cars;
-	
+	ArrayList<Account> Accounts;
+	ArrayList<Car> Cars;
+	Fine fine;
 	public CarRentalSystem() {
 		Accounts = new ArrayList<Account>();
 		Cars = new ArrayList<Car>();
+		fine = new Fine();
 	}
 	
 	public void signUp()
@@ -141,6 +141,7 @@ public class CarRentalSystem {
 	
 	public void rentCar(Account a)
 	{
+		System.out.println("Following is the list of all available cars\n");
 		displayAllAvailableCars();
 		System.out.println("Enter registraion number of car");
 		try {
@@ -152,10 +153,11 @@ public class CarRentalSystem {
 				{
 					if(c.isAvailable()) {
 						System.out.println(c.toString());
-						System.out.println("You have to pay "+c.getRentalCharge()+" to have the get car");
+						System.out.println("You have to pay "+c.getRentalCharge()+" to have the car "+c.getName()+"\n");
 						int choice = 0;
 						while(choice !=1 && choice !=2)
 						{
+							
 							System.out.println("Do you wish to charge your account with "+c.getRentalCharge()+" rental charge");
 							System.out.println("Press 1 for Yes");
 							System.out.println("Press 2 for No");
@@ -171,15 +173,18 @@ public class CarRentalSystem {
 							break;
 						}
 					}
-						
+					else {
+						System.out.println("Car with registration number "+c.getId()+" is currently not avaiable \n");
+						break;
+					}				
 				}
 			}
 		}catch(InputMismatchException e) {
-			System.out.println("This fild is an Integer field and only accepts integer");
+			System.out.println("This fild is an Integer field and only accepts integer \n");
 		}
 	}
 	public void returnCar(Account a) {
-		System.out.println("Enter registraion number of car");
+		System.out.println("Enter registraion number of car \n");
 		try {
 			Scanner sc = new Scanner(System.in);
 			int id = sc.nextInt();
@@ -195,14 +200,11 @@ public class CarRentalSystem {
 			else {
 				a.getRentedCars().remove(c);
 				c.setAvailable(true);
-				if(c.getReturnDate().isBefore(LocalDate.now())) {
-					a.setCharges(c.getRentalCharge()+100);
-					System.out.println("You have returned the car after its due date hence a fine of 100 has been charged to your accout");
-				return;
-				}
+				System.out.println(c.getName()+" has been returned to Car Rental System \n");
+				fine.check(c,a);
 			}
 		}catch(InputMismatchException e) {
-			System.out.println("This field only accepts numbers kindly try again");
+			System.out.println("This field only accepts numbers kindly try again \n");
 		}
 	}
 	public void displayAllAvailableCars() {
@@ -211,5 +213,6 @@ public class CarRentalSystem {
 			if(c.isAvailable())
 			System.out.println(c.toString());
 		}
+		System.out.println();
 	}
 }
